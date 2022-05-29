@@ -17,22 +17,32 @@ const list = [
     },
 ];
 
-const List = (props) => (
+
+// JavaScript’s spread operator allows us to literally spread all key/value pairs of an object to another
+// object. This can also be done in React’s JSX. Instead of passing each property one at a time via
+// props from List to Item component as before, we can use JavaScript’s spread operator to pass all the
+// object’s key/value pairs as attribute/value pairs to a JSX element:
+
+
+const List = ({ list }) => (
     <ul>
-        {props.list.map((item) => (
-            <Item key={item.objectID} item={item} />
+        {list.map((item) => (
+            //<Item key={item.objectID} item={item} />
+            <Item key={item.objectID} {...item} />
         ))}
     </ul>
 );
-const Item = (props) => (
+const Item = ({ title, url, author, num_comments, points }) => (
     <li>
         <span>
-            <a href={props.item.url}>{props.item.title}</a>
+            <a href={url}>{title}</a>
         </span>
-        <span>{props.item.author}</span>
-        <span>{props.item.num_comments}</span>
-        <span>{props.item.points}</span>
+        <span>{author}</span>
+        <span>{num_comments}</span>
+        <span>{points}</span>
     </li>
 );
+
+
 
 export default List;
